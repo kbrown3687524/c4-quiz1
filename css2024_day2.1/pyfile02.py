@@ -61,7 +61,7 @@ df9.dropna(subset=['Date'], inplace = True)
 df9 .loc[7, 'Duration']=45
 df9.drop_duplicates(inplace=True)
 df9 = df9.reset_index(drop=True)
-#print(df9)
+print(df9)
 
 df10 = pd.read_csv("data_02/data_02/person_split1.csv")
 df11 = pd.read_csv("data_02/data_02/person_split2.csv")
