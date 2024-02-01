@@ -1,5 +1,10 @@
 import pandas as pd
 from collections import Counter
+import matplotlib.pyplot as plt
+import plotly.express as px
+import seaborn as sns
+
+
 
 df = pd.read_csv("movie_dataset.csv")
 pd.set_option('display.max_columns', None)
@@ -13,8 +18,8 @@ for column in df:
 	#print(column)
 	column_type = df[column].dtypes
 	if column_type == 'float64':
-		x = df[column].mean()
-		df[column].fillna(x, inplace=True)	
+		x_val = df[column].mean()
+		df[column].fillna(x_val, inplace=True)	
 df2 = df.sort_values(by='Rating', ascending=False)
 revenue = df['Revenue(Millions)'].mean()
 #print(df2)
@@ -85,4 +90,28 @@ for i in all_genres_in_all_movies:
 	if i not in new_list:
 		new_list.append(i)
 
-print(len(new_list))
+#print(len(new_list))
+
+#plt.bar(df['Revenue(Millions)'], df['Metascore'])
+#plt.show()
+#fig = px.scatter(x=df['Revenue(Millions)'], y=df['Metascore'], labels={'x': 'X-axis', 'y': 'Y-axis'}, title='Scatter Plot')
+#fig.write_html("plot.html")
+
+
+#sns.lmplot(x="Revenue(Millions)", y="Metascore", data=df);
+#sns.lmplot(x="Runtime(Minutes)",y="Metascore", data=df)
+#sns.lmplot(x="Runtime(Minutes)",y="Rating", data=df)
+#sns.lmplot(x="Revenue(Millions)",y="Rating", data=df)
+#print(df)
+plt.show()
+
+
+df_iso = df.iloc[:,7:-1]
+print(df_iso)
+
+df_iso = df_iso.astype(float)
+df_matrix = df_iso.corr()
+print(df_matrix)
+
+sns.heatmap(df_matrix);
+plt.show()
